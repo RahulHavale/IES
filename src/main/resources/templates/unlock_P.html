@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Unlock Account</title>
+
+    <style>
+
+        body{
+            margin:0;
+            padding:0;
+            font-family: Arial, sans-serif;
+            background:#f5f7fb;
+        }
+
+        /* Main Container */
+        .main-container{
+            width:900px;
+            margin:60px auto;
+            background:#ffffff;
+            border-radius:10px;
+            padding:40px;
+            box-shadow:0 0 15px rgba(0,0,0,0.1);
+        }
+
+        /* Title Card */
+        .title-box{
+            background:#f0f2ff;
+            padding:20px;
+            border-radius:8px;
+            margin-bottom:30px;
+        }
+
+        .title-box h2{
+            margin:0;
+            color:#333;
+        }
+
+        /* Form Layout */
+        .form-box{
+            background:#fafbff;
+            padding:30px;
+            border-radius:8px;
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:25px;
+        }
+
+        label{
+            font-size:14px;
+            color:#555;
+            display:block;
+            margin-bottom:6px;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            font-size:14px;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#4a6cf7;
+        }
+
+        /* Button */
+        .btn-area{
+            margin-top:30px;
+        }
+
+        button{
+            background:#4a6cf7;
+            color:#fff;
+            border:none;
+            padding:12px 30px;
+            font-size:15px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#3a5be0;
+        }
+
+        /* Center Form */
+        .center-form{
+            max-width:500px;
+            margin:auto;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- Heading -->
+    <div class="title-box">
+        <h2>Unlock Account</h2>
+    </div>
+
+    <p th:if="${succMsg}" th:text="${succMsg}" class="text-success"/>
+    <p th:if="${errMsg}" th:text="${errMsg}" class="text-danger"/>
+    <!-- Form -->
+    <div class="form-box">
+
+        <form class="center-form"  th:action="@{/unlock}" th:object="${unlockForm}" method="post">
+
+            <div class="email-info">
+                <h6>Your Email : <p th:text="${unlockForm.email}"></p></h6>
+                <input type="hidden" th:field="${unlockForm.email}"/>
+            </div>
+
+            <div class="form-grid">
+
+                <!-- Temp Password -->
+                <div>
+                    <label>Temp Password</label>
+                    <input type="password"
+                           placeholder="Enter Temporary Password"
+                           th:field="*{tempPzwd}"
+                           required>
+                </div>
+
+                <!-- New Password -->
+                <div>
+                    <label>New Password</label>
+                    <input type="password"
+                           placeholder="Set New Password"
+                           th:field="*{pzwd}"
+                           required>
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+            <div class="btn-area">
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
