@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Grid Layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4a6cf7;
+        }
+
+        /* Gender */
+        .gender-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .gender-box label {
+            margin: 0;
+        }
+
+        /* Button */
+        .btn-box {
+            margin-top: 30px;
+        }
+
+        button {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3b5de7;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Create Account</h2>
+    <p th:if="${succMsg}" th:text="${succMsg}" class="text-success"/>
+    <p th:if="${errMsg}" th:text="${errMsg}" class="text-danger"/>
+
+    <form th:action="@{/register}" th:object="${registerForm}" method="post">
+
+        <div class="form-grid">
+
+            <!-- Full Name -->
+            <div>
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe" th:field="*{fullName}" required>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label>Email ID</label>
+                <input type="email" placeholder="johndoe@gmail.com" th:field="*{email}" required>
+            </div>
+
+            <!-- Mobile -->
+            <div>
+                <label>Mobile Number</label>
+                <input type="tel" placeholder="1234567890" th:field="*{phoneNumber}" required>
+            </div>
+
+            <!-- Gender -->
+            <div>
+                <label>Gender</label>
+
+                <div class="gender-box">
+                    <label>
+                        <input type="radio" name="gender" value="male" th:field="*{gender}" checked>
+                        Male
+                    </label>
+
+                    <label>
+                        <input type="radio" name="gender" value="female" th:field="*{gender}">
+                        Female
+                    </label>
+                </div>
+            </div>
+
+            <!-- DOB -->
+            <div>
+                <label>DOB</label>
+                <input type="date" th:field="*{dob}">
+            </div>
+
+            <!-- SSN -->
+            <div>
+                <label>SSN</label>
+                <input type="text" placeholder="123456" th:field="*{ssn}">
+            </div>
+
+        </div>
+
+        <!-- Submit Button -->
+        <div class="btn-box">
+            <button type="submit">Submit</button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
